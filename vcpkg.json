@@ -1,6 +1,6 @@
 {
-  "name": "beman-exemplar",
-  "version-semver": "2.4.0",
+  "name": "beman-str-split",
+  "version-semver": "0.1.0",
   "dependencies": [
     {
       "name": "gtest",
