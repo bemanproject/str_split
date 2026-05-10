@@ -6,7 +6,7 @@ add_executable(beman.str_split.tests.todo)
 target_sources(beman.str_split.tests.todo PRIVATE todo.test.cpp)
 target_link_libraries(
     beman.str_split.tests.todo
-    PRIVATE beman::str_split GTest::gtest_main
+    PRIVATE beman::str_split GTest::gtest_main GTest::gmock
 )
 if(BEMAN_EXEMPLAR_USE_MODULES)
     set_target_properties(
