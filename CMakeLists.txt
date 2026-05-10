@@ -25,7 +25,11 @@ option(
     ${PROJECT_IS_TOP_LEVEL}
 )
 
-option(BEMAN_STR_SPLIT_USE_MODULES "Provide beman.str_split as a C++ module" OFF)
+option(
+    BEMAN_STR_SPLIT_USE_MODULES
+    "Provide beman.str_split as a C++ module"
+    OFF
+)
 
 if(BEMAN_STR_SPLIT_USE_MODULES)
     set(CMAKE_CXX_SCAN_FOR_MODULES ON)
