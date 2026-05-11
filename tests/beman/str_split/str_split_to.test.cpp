@@ -1,23 +1,15 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
+#include <array>
+#include <deque>
+#include <string_view>
+#include <type_traits>
+#include <vector>
+
 #include <beman/str_split/config.hpp>
 #include <beman/str_split/str_split_to.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
-#if BEMAN_STR_SPLIT_USE_MODULES()
-
-import std;
-
-#else
-
-    #include <array>
-    #include <deque>
-    #include <string_view>
-    #include <type_traits>
-    #include <vector>
-
-#endif // BEMAN_STR_SPLIT_USE_MODULES()
 
 namespace {
 
