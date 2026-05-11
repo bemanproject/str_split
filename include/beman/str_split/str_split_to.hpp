@@ -15,13 +15,11 @@ import beman.str_split;
 
         #include <string>
         #include <string_view>
+        #include <vector>
 
     #endif // !BEMAN_STR_SPLIT_USE_MODULES()
 
 namespace beman::str_split {
-
-// TODO(aryann): Delete this file and move the contents to str_split.hpp once the we make more progress on the surface
-// definition.
 
 //------------------------------------------------------------------------------
 // Concepts:
@@ -103,22 +101,31 @@ struct split_by_ascii_whitespace {};
 // TODO(aryann): We should structure the input similar to `split_by` by allowing both ranges and
 // `std::string_view`-convertible types.
 
-template <typename Container, typename Pattern>
-constexpr Container str_split(std::string_view input, Pattern pattern) {
-    Container empty;
-    return empty;
+template <class OutputIt, class CharT, class Traits, class Delimiter>
+auto str_split_to(std::basic_string_view<CharT, Traits> text, Delimiter&& delimiter, OutputIt dest) -> OutputIt {
+    return dest;
 }
 
-template <typename Container>
-constexpr Container str_split(std::string_view input) {
-    return str_split<Container>(input, split_by_ascii_whitespace{});
+template <class Container, class CharT, class Traits, class Delimiter>
+auto str_split_to(std::basic_string_view<CharT, Traits> text, Delimiter&& delimiter) -> Container {
+    Container container;
+    return str_split_to(text, delimiter, container);
+}
+
+template <template <class...> class Container, class CharT, class Traits, class Delimiter>
+auto str_split_to(std::basic_string_view<CharT, Traits> text, Delimiter&& delimiter)
+    -> Container<std::basic_string_view<CharT, Traits> > {
+    return str_split_to(text, delimiter);
+}
+
+template <class CharT, class Traits, class Delimiter>
+auto str_split_to(std::basic_string_view<CharT, Traits> text, Delimiter&& delimiter)
+    -> std::vector<std::basic_string_view<CharT, Traits> > {
+    std::vector<std::basic_string_view<CharT, Traits> > result;
+    return result;
 }
 
 // TODO(aryann): Add support for max splits.
-
-// TODO(aryann): For now, the caller must pass the return type. We should decide whether to use implicit conversions to
-// adapt to the user's declared return type (similar to absl's approach). If we retain the current structure, we should
-// decide on a default for the common case (`std::vector<std::string_view>`?).
 
 } // namespace beman::str_split
 
