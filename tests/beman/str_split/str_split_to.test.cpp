@@ -43,15 +43,18 @@ TEST(Delimiter, SplitByAsciiWhitespace) {
 }
 
 TEST(StrSplitTo, StringViewVector) {
-    static_assert(std::is_same_v<decltype(str_split_to("my string"sv, split_by(" "))), std::vector<std::string_view>>);
+    static_assert(std::is_same_v<decltype(str_split_to("my string"sv, split_by_ascii_whitespace())),
+                                 std::vector<std::string_view>>);
 
     EXPECT_THAT(str_split_to("my string"sv, split_by_ascii_whitespace()), ElementsAre());
 }
 
 TEST(StrSplitTo, StringViewContainer) {
-    static_assert(std::is_same_v<decltype(str_split_to<std::vector<std::string_view>>("my string"sv, split_by(" "))),
+    static_assert(std::is_same_v<decltype(str_split_to<std::vector<std::string_view>>("my string"sv,
+                                                                                      split_by_ascii_whitespace())),
                                  std::vector<std::string_view>>);
-    static_assert(std::is_same_v<decltype(str_split_to<std::deque<std::string_view>>("my string"sv, split_by(" "))),
+    static_assert(std::is_same_v<decltype(str_split_to<std::deque<std::string_view>>("my string"sv,
+                                                                                     split_by_ascii_whitespace())),
                                  std::deque<std::string_view>>);
 
     EXPECT_THAT(str_split_to<std::vector<std::string_view>>("my string"sv, split_by_ascii_whitespace()),
@@ -60,13 +63,34 @@ TEST(StrSplitTo, StringViewContainer) {
 }
 
 TEST(StrSplitTo, StringContainer) {
-    static_assert(std::is_same_v<decltype(str_split_to<std::vector<std::string>>("my string"sv, split_by(" "))),
-                                 std::vector<std::string>>);
-    static_assert(std::is_same_v<decltype(str_split_to<std::deque<std::string>>("my string"sv, split_by(" "))),
-                                 std::deque<std::string>>);
+    static_assert(
+        std::is_same_v<decltype(str_split_to<std::vector<std::string>>("my string"sv, split_by_ascii_whitespace())),
+                       std::vector<std::string>>);
+    static_assert(
+        std::is_same_v<decltype(str_split_to<std::deque<std::string>>("my string"sv, split_by_ascii_whitespace())),
+                       std::deque<std::string>>);
 
     EXPECT_THAT(str_split_to<std::vector<std::string>>("my string"sv, split_by_ascii_whitespace()), ElementsAre());
     EXPECT_THAT(str_split_to<std::deque<std::string>>("my string"sv, split_by_ascii_whitespace()), ElementsAre());
+}
+
+TEST(StrSplitTo, CharTypes) {
+    static_assert(std::is_same_v<decltype(str_split_to(std::wstring_view(L"my string"), split_by_ascii_whitespace())),
+                                 std::vector<std::wstring_view>>);
+    static_assert(
+        std::is_same_v<decltype(str_split_to(std::u8string_view(u8"my string"), split_by_ascii_whitespace())),
+                       std::vector<std::u8string_view>>);
+    static_assert(
+        std::is_same_v<decltype(str_split_to(std::u16string_view(u"my string"), split_by_ascii_whitespace())),
+                       std::vector<std::u16string_view>>);
+    static_assert(
+        std::is_same_v<decltype(str_split_to(std::u32string_view(U"my string"), split_by_ascii_whitespace())),
+                       std::vector<std::u32string_view>>);
+
+    EXPECT_THAT(str_split_to(std::wstring_view(L"my string"), split_by_ascii_whitespace()), ElementsAre());
+    EXPECT_THAT(str_split_to(std::u8string_view(u8"my string"), split_by_ascii_whitespace()), ElementsAre());
+    EXPECT_THAT(str_split_to(std::u16string_view(u"my string"), split_by_ascii_whitespace()), ElementsAre());
+    EXPECT_THAT(str_split_to(std::u32string_view(U"my string"), split_by_ascii_whitespace()), ElementsAre());
 }
 
 } // namespace
