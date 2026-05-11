@@ -16,6 +16,7 @@ using namespace std::literals::string_view_literals;
 
 using ::beman::str_split::split_by;
 using ::beman::str_split::split_by_ascii_whitespace;
+using ::beman::str_split::split_by_char;
 using ::beman::str_split::str_split_to;
 using ::testing::ElementsAre;
 
@@ -26,12 +27,19 @@ TEST(Delimiter, SplitBy) {
     EXPECT_THAT(str_split_to("my string"sv, split_by(std::string("string"))), ElementsAre());
     EXPECT_THAT(str_split_to("my string"sv, split_by(std::string_view("string"))), ElementsAre());
 
-    // Single char:
-    EXPECT_THAT(str_split_to("my string"sv, split_by('s')), ElementsAre());
-
     // Ranges:
     EXPECT_THAT(str_split_to("my string"sv, split_by(std::vector<char>{'a', 'b', 'c'})), ElementsAre());
     EXPECT_THAT(str_split_to("my string"sv, split_by(std::array{'a', 'b', 'c'})), ElementsAre());
+}
+
+TEST(Delimiter, SplitByChar) {
+    EXPECT_THAT(str_split_to("my string"sv, split_by_char(' ')), ElementsAre());
+    EXPECT_THAT(str_split_to("my string"sv, split_by_char('s')), ElementsAre());
+}
+
+TEST(Delimiter, SplitByAsciiWhitespace) {
+    EXPECT_THAT(str_split_to(""sv, split_by_ascii_whitespace()), ElementsAre());
+    EXPECT_THAT(str_split_to("my string"sv, split_by_ascii_whitespace()), ElementsAre());
 }
 
 TEST(StrSplitTo, StringViewVector) {

@@ -44,11 +44,9 @@ concept different_from = !std::same_as<std::remove_cvref_t<T>, Self>;
 
 // Splits by a substring.
 struct split_by {
+  public:
     // Constructor for anything that can be converted to a `std::string_view`.
     constexpr explicit split_by(std::string_view delimiter) : delimiter_(delimiter) {}
-
-    // Constructor for the single character case.
-    constexpr explicit split_by(char delimiter) : delimiter_(1, delimiter) {}
 
     // Constructor for range of characters that are not `std::string_view` convertible.
     template <std::ranges::input_range Range>
@@ -74,9 +72,17 @@ struct split_by {
 
 // Splits by the first matching character in a given character sequence.
 struct split_by_first_of {
-
   private:
     const std::string chars_;
+};
+
+// Splits by character.
+struct split_by_char {
+  public:
+    constexpr explicit split_by_char(char delimiter) : delimiter_(delimiter) {}
+
+  private:
+    const char delimiter_;
 };
 
 struct split_by_ascii_whitespace {};
