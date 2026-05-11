@@ -6,7 +6,7 @@
 #include <beman/str_split/config.hpp>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <beman/str_split/todo.hpp>
+#include <beman/str_split/str_split_to.hpp>
 
 namespace {
 

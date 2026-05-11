@@ -1,18 +1,22 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#ifndef BEMAN_STR_SPLIT_TODO_HPP
-#define BEMAN_STR_SPLIT_TODO_HPP
+#ifndef BEMAN_STR_SPLIT_STR_SPLIT_TO_HPP
+#define BEMAN_STR_SPLIT_STR_SPLIT_TO_HPP
 
 #include <beman/str_split/config.hpp>
-
-#include <string>
-#include <string_view>
 
 #if BEMAN_STR_SPLIT_USE_MODULES() && !defined(BEMAN_STR_SPLIT_INCLUDED_FROM_INTERFACE_UNIT)
 
 import beman.str_split;
 
 #else
+
+    #if !BEMAN_STR_SPLIT_USE_MODULES()
+
+        #include <string>
+        #include <string_view>
+
+    #endif // !BEMAN_STR_SPLIT_USE_MODULES()
 
 namespace beman::str_split {
 
@@ -121,4 +125,4 @@ constexpr Container str_split(std::string_view input) {
 #endif // BEMAN_STR_SPLIT_USE_MODULES() &&
        // !defined(BEMAN_STR_SPLIT_INCLUDED_FROM_INTERFACE_UNIT)
 
-#endif // BEMAN_STR_SPLIT_TODO_HPP
+#endif // BEMAN_STR_SPLIT_STR_SPLIT_TO_HPP
