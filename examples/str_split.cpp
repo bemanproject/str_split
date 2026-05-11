@@ -18,4 +18,6 @@ int main() {
     for (std::string_view part : parts) {
         std::cout << part << std::endl;
     }
+
+    return 0;
 }
