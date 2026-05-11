@@ -102,10 +102,6 @@ struct split_by_ascii_whitespace {};
 //   * split_by_first_of(std::string_view, Range&&): Equivalent to
 //     str_split(std::string_view, split_by_first_of).
 //
-// I'm partial towards this alternative as it more closely mirrors `std::string::find` and `:find_first_of`.
-
-// TODO(aryann): We should structure the input similar to `split_by` by allowing both ranges and
-// `std::string_view`-convertible types.
 
 template <class OutputIt, class CharT, class Traits, class Delimiter>
 auto str_split_to(std::basic_string_view<CharT, Traits> text, Delimiter&& delimiter, OutputIt dest) -> OutputIt {
