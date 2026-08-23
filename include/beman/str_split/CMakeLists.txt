@@ -9,7 +9,7 @@ if(BEMAN_STR_SPLIT_USE_MODULES)
                 FILES
                     config.hpp
                     str_split.hpp
-                    todo.hpp
+                    str_split_to.hpp
                     "${PROJECT_BINARY_DIR}/include/beman/str_split/config_generated.hpp"
     )
 else()
@@ -20,7 +20,7 @@ else()
                 FILES
                     config.hpp
                     str_split.hpp
-                    todo.hpp
+                    str_split_to.hpp
                     "${PROJECT_BINARY_DIR}/include/beman/str_split/config_generated.hpp"
     )
 endif()
