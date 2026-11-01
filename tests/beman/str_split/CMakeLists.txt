@@ -8,7 +8,7 @@ target_link_libraries(
     beman.str_split.tests.todo
     PRIVATE beman::str_split GTest::gtest_main
 )
-if(BEMAN_EXEMPLAR_USE_MODULES)
+if(BEMAN_STR_SPLIT_USE_MODULES)
     set_target_properties(
         beman.str_split.tests.todo
         PROPERTIES CXX_MODULE_STD ON
